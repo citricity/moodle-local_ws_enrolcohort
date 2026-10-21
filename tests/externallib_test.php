@@ -33,6 +33,9 @@ require_once($CFG->dirroot.'/local/ws_enrolcohort/externallib.php');
 
 use \local_ws_enrolcohort\tools;
 
+/**
+ * @runTestsInSeparateProcesses
+ */
 class local_ws_enrolcohort_externallib_testcase extends externallib_advanced_testcase {
     public function create_cohorts($numberofcohorts = 100) {
         for ($i = 0; $i < $numberofcohorts; $i++) {
