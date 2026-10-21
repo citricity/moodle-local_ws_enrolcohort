@@ -25,12 +25,21 @@
 
 namespace local_ws_enrolcohort\exceptions;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
-
 use local_ws_enrolcohort\tools;
 
+/**
+ * Base exception for an object that is not available in the course context.
+ *
+ * @package     local_ws_enrolcohort
+ */
 class not_available_at_context_exception extends \moodle_exception {
+    /**
+     * Constructor.
+     *
+     * @param string $object The type of object, for example "Cohort".
+     * @param int|string $id The id of the object.
+     * @param string $word The word describing what the object is not, for example "available".
+     */
     public function __construct($object = '', $id = '', $word = '') {
         // Prepare some strings and things.
         $errorcode  = 'unavailableatcontext';

@@ -25,62 +25,84 @@
 
 namespace local_ws_enrolcohort\responses;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
-
+/**
+ * Response details for a cohort enrolment instance.
+ *
+ * @package     local_ws_enrolcohort
+ */
 class enrol extends response {
     /**
-     * @var $name           The name provided to the enrolment instance.
+     * @var string The name provided to the enrolment instance.
      */
     protected $name;
 
     /**
-     * @var $status         The status of the enrolment instance.
+     * @var int The status of the enrolment instance.
      */
     protected $status;
 
     /**
-     * @var $roleid         The id of the role associated to this enrolment instance.
+     * @var int The id of the role associated to this enrolment instance.
      */
     protected $roleid;
 
     /**
-     * @var $courseid       The id of the course this enrolment instance is for.
+     * @var int The id of the course this enrolment instance is for.
      */
     protected $courseid;
 
     /**
-     * @var $cohortid       The id of the cohort.
+     * @var int The id of the cohort.
      */
     protected $cohortid;
 
     /**
-     * @var $groupid        The id of the group.
+     * @var int The id of the group.
      */
     protected $groupid;
 
     /**
-     * @var $course         More detail about the course associated to this enrolment instance.
+     * @var array|null More detail about the course associated to this enrolment instance.
      */
     protected $course;
 
     /**
-     * @var $cohort         More detail about the cohort associated to this enrolment instance.
+     * @var array|null More detail about the cohort associated to this enrolment instance.
      */
     protected $cohort;
 
     /**
-     * @var $role           More detail about the role associated to this enrolment instance.
+     * @var array|null More detail about the role associated to this enrolment instance.
      */
     protected $role;
 
     /**
-     * @var $group          More detail about the group associated to this enrolment instance.
+     * @var array|null More detail about the group associated to this enrolment instance.
      */
     protected $group;
 
-    public function __construct($id = 0, $object = 'enrol', $name = '', $status = 0,
-                                $roleid = 0, $courseid = 0, $cohortid = 0, $groupid = 0) {
+    /**
+     * enrol constructor.
+     *
+     * @param int $id The id of the enrolment instance.
+     * @param string $object The name of this object. Don't specify when constructing.
+     * @param string $name The name of the enrolment instance.
+     * @param int $status The status of the enrolment instance.
+     * @param int $roleid The id of the role assigned by the enrolment instance.
+     * @param int $courseid The id of the course.
+     * @param int $cohortid The id of the cohort.
+     * @param int $groupid The id of the group, or 0 for none.
+     */
+    public function __construct(
+        $id = 0,
+        $object = 'enrol',
+        $name = '',
+        $status = 0,
+        $roleid = 0,
+        $courseid = 0,
+        $cohortid = 0,
+        $groupid = 0
+    ) {
         parent::__construct($id, $object);
 
         // Set the values for the fields.
@@ -95,7 +117,7 @@ class enrol extends response {
     /**
      * Set the details about the course for this enrolment method.
      *
-     * @param $course
+     * @param array $course The course details, as returned by course::to_array().
      */
     public function set_course($course) {
         $this->course = $course;
@@ -104,7 +126,7 @@ class enrol extends response {
     /**
      * Set the details about the cohort for this enrolment method.
      *
-     * @param $cohort
+     * @param array $cohort The cohort details, as returned by cohort::to_array().
      */
     public function set_cohort($cohort) {
         $this->cohort = $cohort;
@@ -113,7 +135,7 @@ class enrol extends response {
     /**
      * Set the details about the role for this enrolment method.
      *
-     * @param $role
+     * @param array $role The role details, as returned by role::to_array().
      */
     public function set_role($role) {
         $this->role = $role;
@@ -122,7 +144,7 @@ class enrol extends response {
     /**
      * Set the details about the group for this enrolment method.
      *
-     * @param $group
+     * @param array $group The group details, as returned by group::to_array().
      */
     public function set_group($group) {
         $this->group = $group;

@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Cohort enrolment instance does not exist exception for local_ws_enrolcohort.
+ * Cohort enrolment method not available exception for local_ws_enrolcohort.
  *
  * @package     local_ws_enrolcohort
  * @author      Donald Barrett <donald.barrett@learningworks.co.nz>
@@ -25,11 +25,18 @@
 
 namespace local_ws_enrolcohort\exceptions;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
+use local_ws_enrolcohort\tools;
 
-class cohort_enrol_instance_not_found_exception extends object_not_found_exception {
-    public function __construct($enrolinstanceid = null) {
-        parent::__construct('cohort enrol instance', 'id', $enrolinstanceid);
+/**
+ * Thrown when the cohort sync enrolment plugin is not available.
+ *
+ * @package     local_ws_enrolcohort
+ */
+class method_not_available_exception extends \moodle_exception {
+    /**
+     * Constructor.
+     */
+    public function __construct() {
+        parent::__construct('cohortenrolmethodnotavailable', tools::COMPONENT_NAME);
     }
 }

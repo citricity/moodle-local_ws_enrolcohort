@@ -25,9 +25,11 @@
 
 namespace local_ws_enrolcohort\responses;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
-
+/**
+ * Response details for a role.
+ *
+ * @package     local_ws_enrolcohort
+ */
 class role extends response {
     /**
      * @var mixed $shortname    The shortname of the role.

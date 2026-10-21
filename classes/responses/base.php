@@ -25,9 +25,11 @@
 
 namespace local_ws_enrolcohort\responses;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
-
+/**
+ * Interface for the objects that make up a webservice response.
+ *
+ * @package     local_ws_enrolcohort
+ */
 interface base {
     /**
      * base constructor.

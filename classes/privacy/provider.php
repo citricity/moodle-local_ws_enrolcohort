@@ -25,13 +25,14 @@
 
 namespace local_ws_enrolcohort\privacy;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
-
 use core_privacy\local\metadata\null_provider;
 
+/**
+ * Privacy provider for local_ws_enrolcohort. The plugin stores no personal data.
+ *
+ * @package     local_ws_enrolcohort
+ */
 class provider implements null_provider {
-
     /**
      * Get the language string identifier with the component's language
      * file to explain why this plugin stores no data.

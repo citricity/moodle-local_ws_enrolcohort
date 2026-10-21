@@ -25,32 +25,34 @@
 
 namespace local_ws_enrolcohort\responses;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
-
+/**
+ * Response details for a course.
+ *
+ * @package     local_ws_enrolcohort
+ */
 class course extends response {
     /**
-     * @var $name           The name of the course.
+     * @var string The name of the course.
      */
     protected $name;
 
     /**
-     * @var $idnumber       The idnumber of the course.
+     * @var string The idnumber of the course.
      */
     protected $idnumber;
 
     /**
-     * @var $shortname      The shortname of the course.
+     * @var string The shortname of the course.
      */
     protected $shortname;
 
     /**
-     * @var $visible        Course visibility.
+     * @var int Course visibility.
      */
     protected $visible;
 
     /**
-     * @var $format         The format of the course.
+     * @var string The format of the course.
      */
     protected $format;
 

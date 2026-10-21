@@ -1,0 +1,20 @@
+{
+  "name": "cohortenrol",
+  "moodleTag": "v4.5.15",
+  "phpVersion": "8.2",
+  "plugins": [
+    {
+      "repo": "git@github.com:citricity/moodle-local_ws_enrolcohort.git",
+      "branch": "MOODLE_405_WIP"
+    }
+  ],
+  "containerPrefix": "cohortenrol",
+  "host": "cohortenrol.test",
+  "port": 8076,
+  "updateHostHosts": true,
+  "dbType": "pgsql",
+  "dbHostPort": "52437",
+  "dbVersion": "15",
+  "developer": true,
+  "mountPlugins": true
+}

@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * A cohort enrolment instance that is already synchronised with role exception for local_ws_enrolcohort.
+ * Cohort enrolment instance does not exist exception for local_ws_enrolcohort.
  *
  * @package     local_ws_enrolcohort
  * @author      Donald Barrett <donald.barrett@learningworks.co.nz>
@@ -25,18 +25,18 @@
 
 namespace local_ws_enrolcohort\exceptions;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
-
-use \local_ws_enrolcohort\tools;
-
-class cohort_enrol_instance_already_synced_with_role_exception extends \moodle_exception {
-    public function __construct($enrolinstanceid, $roleid) {
-        // Prepare some strings and things.
-        $errorcode  = 'enrolcohortalreadysyncedwithrole';
-        $a          = ['enrolid' => $enrolinstanceid, 'roleid' => $roleid];
-        $debuginfo  = tools::get_string('enrolcohortalreadysyncedwithrole:message', $a);
-
-        parent::__construct($errorcode, tools::COMPONENT_NAME, '', null, $debuginfo);
+/**
+ * Thrown when a cohort enrolment instance cannot be found.
+ *
+ * @package     local_ws_enrolcohort
+ */
+class instance_not_found_exception extends object_not_found_exception {
+    /**
+     * Constructor.
+     *
+     * @param int|null $enrolinstanceid The id of the enrolment instance.
+     */
+    public function __construct($enrolinstanceid = null) {
+        parent::__construct('cohort enrol instance', 'id', $enrolinstanceid);
     }
 }

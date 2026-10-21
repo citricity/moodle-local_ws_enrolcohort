@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Cohort enrolment method not available exception for local_ws_enrolcohort.
+ * A cohort enrolment instance that is already synchronised with role exception for local_ws_enrolcohort.
  *
  * @package     local_ws_enrolcohort
  * @author      Donald Barrett <donald.barrett@learningworks.co.nz>
@@ -25,13 +25,26 @@
 
 namespace local_ws_enrolcohort\exceptions;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
-
 use local_ws_enrolcohort\tools;
 
-class cohort_enrol_method_not_available_exception extends \moodle_exception {
-    public function __construct() {
-        parent::__construct('cohortenrolmethodnotavailable', tools::COMPONENT_NAME);
+/**
+ * Thrown when the cohort is already synced to the course with the requested role.
+ *
+ * @package     local_ws_enrolcohort
+ */
+class instance_role_synced_already_exception extends \moodle_exception {
+    /**
+     * Constructor.
+     *
+     * @param int $enrolinstanceid The id of the existing cohort enrolment instance.
+     * @param int $roleid The id of the role.
+     */
+    public function __construct($enrolinstanceid, $roleid) {
+        // Prepare some strings and things.
+        $errorcode  = 'enrolcohortalreadysyncedwithrole';
+        $a          = ['enrolid' => $enrolinstanceid, 'roleid' => $roleid];
+        $debuginfo  = tools::get_string('enrolcohortalreadysyncedwithrole:message', $a);
+
+        parent::__construct($errorcode, tools::COMPONENT_NAME, '', null, $debuginfo);
     }
 }

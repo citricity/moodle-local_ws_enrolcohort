@@ -25,10 +25,17 @@
 
 namespace local_ws_enrolcohort\exceptions;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
-
+/**
+ * Thrown when a group cannot be found in the course.
+ *
+ * @package     local_ws_enrolcohort
+ */
 class group_not_found_exception extends object_not_found_exception {
+    /**
+     * Constructor.
+     *
+     * @param int|null $groupid The id of the group.
+     */
     public function __construct($groupid = null) {
         parent::__construct('group', 'id', $groupid);
     }

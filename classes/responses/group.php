@@ -25,19 +25,21 @@
 
 namespace local_ws_enrolcohort\responses;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
-
 use local_ws_enrolcohort\tools;
 
+/**
+ * Response details for a group.
+ *
+ * @package     local_ws_enrolcohort
+ */
 class group extends response {
     /**
-     * @var $courseid   The id of the course this group belongs to.
+     * @var int|null The id of the course this group belongs to.
      */
     protected $courseid;
 
     /**
-     * @var $name       The name of the group.
+     * @var string The name of the group.
      */
     protected $name;
 

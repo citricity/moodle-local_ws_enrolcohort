@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Definition of webservices for ws_enrolcohort.
+ * Definition of webservices for local_ws_enrolcohort.
  *
- * @package     ws_enrolcohort
+ * @package     local_ws_enrolcohort
  * @author      Donald Barrett <donald.barrett@learningworks.co.nz>
  * @copyright   2018 onwards, LearningWorks ltd
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -47,7 +47,7 @@ $functions = [
         'classpath'     => 'local/ws_enrolcohort/externallib.php',
         'description'   => 'Adds a new cohort sync enrolment instance to the specified course.',
         'capabilities'  => $addcapabilities,
-        'type'          => 'create'
+        'type'          => 'create',
     ],
     'local_ws_enrolcohort_update_instance' => [
         'classname'     => 'local_ws_enrolcohort_external',
@@ -55,7 +55,7 @@ $functions = [
         'classpath'     => 'local/ws_enrolcohort/externallib.php',
         'description'   => 'Updates an existing cohort enrolment instance.',
         'capabilities'  => $updatecapabilities,
-        'type'          => 'update'
+        'type'          => 'update',
     ],
     'local_ws_enrolcohort_delete_instance' => [
         'classname'     => 'local_ws_enrolcohort_external',
@@ -63,7 +63,7 @@ $functions = [
         'classpath'     => 'local/ws_enrolcohort/externallib.php',
         'description'   => 'Deletes an existing cohort enrolment instance.',
         'capabilities'  => $deletecapabilities,
-        'type'          => 'delete'
+        'type'          => 'delete',
     ],
     'local_ws_enrolcohort_get_instances' => [
         'classname'     => 'local_ws_enrolcohort_external',
@@ -71,8 +71,8 @@ $functions = [
         'classpath'     => 'local/ws_enrolcohort/externallib.php',
         'description'   => 'Gets a list of cohort enrolment instances.',
         'capabilities'  => $getcapabilities,
-        'type'          => 'get'
-    ]
+        'type'          => 'get',
+    ],
 ];
 
 // We define the services to install as pre-build services. A pre-build service is not editable by administrator.
@@ -82,9 +82,9 @@ $services = [
             'local_ws_enrolcohort_add_instance',
             'local_ws_enrolcohort_update_instance',
             'local_ws_enrolcohort_delete_instance',
-            'local_ws_enrolcohort_get_instances'
+            'local_ws_enrolcohort_get_instances',
         ],
         'restrictedusers'   => 1,
         'enabled'           => 1,
-    ]
+    ],
 ];

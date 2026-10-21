@@ -25,10 +25,17 @@
 
 namespace local_ws_enrolcohort\exceptions;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
-
+/**
+ * Thrown when a cohort is not available in the course context.
+ *
+ * @package     local_ws_enrolcohort
+ */
 class cohort_not_available_at_context_exception extends not_available_at_context_exception {
+    /**
+     * Constructor.
+     *
+     * @param int|string $id The id of the cohort.
+     */
     public function __construct($id = '') {
         parent::__construct('Cohort', $id, 'available');
     }

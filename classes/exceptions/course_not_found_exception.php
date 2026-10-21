@@ -25,10 +25,17 @@
 
 namespace local_ws_enrolcohort\exceptions;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
-
+/**
+ * Thrown when a course cannot be found.
+ *
+ * @package     local_ws_enrolcohort
+ */
 class course_not_found_exception extends object_not_found_exception {
+    /**
+     * Constructor.
+     *
+     * @param int|null $courseid The id of the course.
+     */
     public function __construct($courseid = null) {
         parent::__construct('course', 'id', $courseid);
     }

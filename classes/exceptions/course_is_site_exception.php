@@ -25,12 +25,17 @@
 
 namespace local_ws_enrolcohort\exceptions;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
-
 use local_ws_enrolcohort\tools;
 
+/**
+ * Thrown when the site course is given where a normal course is required.
+ *
+ * @package     local_ws_enrolcohort
+ */
 class course_is_site_exception extends invalid_course_exception {
+    /**
+     * Constructor.
+     */
     public function __construct() {
         parent::__construct(tools::get_string('invalidcourse:issite'));
     }
