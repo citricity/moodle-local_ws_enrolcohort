@@ -231,6 +231,9 @@ trait update_instance {
             // Haven't even updated the enrolment instance and we are celebrating.
             $cohortenrolment->update_instance($enrolmentinstance, $data);
 
+            // Reload the instance so the response shows the saved values, including any newly created group.
+            $enrolmentinstance = $DB->get_record('enrol', ['id' => $id], '*', MUST_EXIST);
+
             // Add the course to the response object.
             $extradata[] = (new responses\course($enrolmentinstance->courseid))->to_array();
 

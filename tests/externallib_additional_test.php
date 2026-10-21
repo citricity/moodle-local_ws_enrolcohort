@@ -350,6 +350,39 @@ final class externallib_additional_test extends \externallib_advanced_testcase {
     }
 
     /**
+     * The enrol details in the update_instance() response show the values after the update, not before.
+     */
+    public function test_update_instance_response_reflects_changes(): void {
+        global $DB;
+
+        $this->resetAfterTest();
+        $this->setAdminUser();
+
+        [$course, , , $added] = $this->create_instance(['name' => 'Before']);
+        $newroleid = $this->getDataGenerator()->create_role();
+
+        $response = local_ws_enrolcohort_external::update_instance([
+            'id' => $added['id'],
+            'name' => 'After',
+            'status' => ENROL_INSTANCE_DISABLED,
+            'roleid' => $newroleid,
+            'groupid' => local_ws_enrolcohort_external::COHORT_GROUP_CREATE_NEW,
+        ]);
+        $cleaned = external_api::clean_returnvalue(local_ws_enrolcohort_external::update_instance_returns(), $response);
+
+        $record = $DB->get_record('enrol', ['id' => $added['id']], '*', MUST_EXIST);
+        $enrol = $this->data_by_object($cleaned)['enrol'];
+
+        $this->assertEquals('After', $record->name);
+        $this->assertEquals($record->name, $enrol['name']);
+        $this->assertEquals(ENROL_INSTANCE_DISABLED, $enrol['status']);
+        $this->assertEquals($newroleid, $enrol['roleid']);
+        $this->assertEquals($record->customint2, $enrol['groupid']);
+        $this->assertGreaterThan(0, $enrol['groupid']);
+        $this->assertTrue($DB->record_exists('groups', ['id' => $enrol['groupid'], 'courseid' => $course->id]));
+    }
+
+    /**
      * update_instance() with groupid -1 creates a new cohort group and links it to the instance.
      */
     public function test_update_instance_create_new_group(): void {
@@ -382,7 +415,7 @@ final class externallib_additional_test extends \externallib_advanced_testcase {
         $manual = reset($manual);
         $this->assertEquals('manual', $manual->enrol);
 
-        $this->expectException(exceptions\cohort_enrol_instance_not_found_exception::class);
+        $this->expectException(exceptions\instance_not_found_exception::class);
         local_ws_enrolcohort_external::update_instance(['id' => $manual->id, 'name' => 'Nope']);
     }
 
@@ -401,8 +434,8 @@ final class externallib_additional_test extends \externallib_advanced_testcase {
 
         try {
             local_ws_enrolcohort_external::delete_instance(['id' => $manual->id]);
-            $this->fail('Expected a cohort_enrol_instance_not_found_exception.');
-        } catch (exceptions\cohort_enrol_instance_not_found_exception $e) {
+            $this->fail('Expected an instance_not_found_exception.');
+        } catch (exceptions\instance_not_found_exception $e) {
             $this->assertTrue($DB->record_exists('enrol', ['id' => $manual->id]));
         }
     }

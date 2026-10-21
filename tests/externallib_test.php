@@ -174,9 +174,9 @@ final class externallib_test extends externallib_advanced_testcase {
         // Delete an enrolment instance that doesn't exist.
         try {
             local_ws_enrolcohort_external::delete_instance(['id' => 118]);
-            $this->fail('Expected a cohort_enrol_instance_not_found exception to be thrown.');
+            $this->fail('Expected an instance_not_found exception to be thrown.');
         } catch (moodle_exception $exception) {
-            $this->assertInstanceOf('\local_ws_enrolcohort\exceptions\cohort_enrol_instance_not_found_exception', $exception);
+            $this->assertInstanceOf('\local_ws_enrolcohort\exceptions\instance_not_found_exception', $exception);
             $this->assertEquals('objectnotfound', $exception->errorcode);
         }
 
@@ -211,7 +211,7 @@ final class externallib_test extends externallib_advanced_testcase {
             $response = local_ws_enrolcohort_external::update_instance(['id' => 1]);
         } catch (moodle_exception $exception) {
             // This should never happen.
-            $this->assertInstanceOf('\local_ws_enrolcohort\exceptions\cohort_enrol_instance_not_found_exception', $exception);
+            $this->assertInstanceOf('\local_ws_enrolcohort\exceptions\instance_not_found_exception', $exception);
             $this->assertEquals('objectnotfound', $exception->errorcode);
         }
 
