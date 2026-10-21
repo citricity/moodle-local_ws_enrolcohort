@@ -27,7 +27,6 @@ use core_privacy\local\metadata\null_provider;
  * @covers      \local_ws_enrolcohort\privacy\provider
  */
 final class provider_test extends \advanced_testcase {
-
     /**
      * The plugin declares that it stores no personal data, with a reason string that exists.
      */

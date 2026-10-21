@@ -25,10 +25,17 @@
 
 namespace local_ws_enrolcohort\exceptions;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
-
+/**
+ * Thrown when a role cannot be found.
+ *
+ * @package     local_ws_enrolcohort
+ */
 class role_not_found_exception extends object_not_found_exception {
+    /**
+     * Constructor.
+     *
+     * @param int|null $roleid The id of the role.
+     */
     public function __construct($roleid = null) {
         parent::__construct('role', 'id', $roleid);
     }

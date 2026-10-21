@@ -25,10 +25,17 @@
 
 namespace local_ws_enrolcohort\exceptions;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
-
+/**
+ * Thrown when a cohort enrolment instance cannot be found.
+ *
+ * @package     local_ws_enrolcohort
+ */
 class cohort_enrol_instance_not_found_exception extends object_not_found_exception {
+    /**
+     * Constructor.
+     *
+     * @param int|null $enrolinstanceid The id of the enrolment instance.
+     */
     public function __construct($enrolinstanceid = null) {
         parent::__construct('cohort enrol instance', 'id', $enrolinstanceid);
     }

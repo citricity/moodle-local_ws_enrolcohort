@@ -25,12 +25,19 @@
 
 namespace local_ws_enrolcohort\exceptions;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
-
 use local_ws_enrolcohort\tools;
 
+/**
+ * Thrown when an enrolment instance status is neither enabled nor disabled.
+ *
+ * @package     local_ws_enrolcohort
+ */
 class invalid_status_exception extends \moodle_exception {
+    /**
+     * Constructor.
+     *
+     * @param int|string $status The status that was supplied.
+     */
     public function __construct($status = '') {
         $a = ['enabled' => ENROL_INSTANCE_ENABLED, 'disabled' => ENROL_INSTANCE_DISABLED, 'actual' => $status];
         parent::__construct('invalidstatus', tools::COMPONENT_NAME, '', null, tools::get_string('invalidstatus:message', $a));

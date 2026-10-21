@@ -25,12 +25,21 @@
 
 namespace local_ws_enrolcohort\exceptions;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
+use local_ws_enrolcohort\tools;
 
-use \local_ws_enrolcohort\tools;
-
+/**
+ * Base exception for an object that cannot be found.
+ *
+ * @package     local_ws_enrolcohort
+ */
 class object_not_found_exception extends \moodle_exception {
+    /**
+     * Constructor.
+     *
+     * @param string $object The type of object, for example "course".
+     * @param string $key The field that was searched on.
+     * @param mixed $value The value that was searched for.
+     */
     public function __construct($object = '', $key = '', $value = '') {
         $a = ['object' => $object, 'key' => $key, 'value' => $value];
         parent::__construct('objectnotfound', tools::COMPONENT_NAME, '', null, tools::get_string('objectnotfound:message', $a));

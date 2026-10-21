@@ -25,12 +25,20 @@
 
 namespace local_ws_enrolcohort\exceptions;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
+use local_ws_enrolcohort\tools;
 
-use \local_ws_enrolcohort\tools;
-
-class cohort_enrol_instance_already_synced_with_role_exception extends \moodle_exception {
+/**
+ * Thrown when the cohort is already synced to the course with the requested role.
+ *
+ * @package     local_ws_enrolcohort
+ */
+class instance_role_synced_already_exception extends \moodle_exception {
+    /**
+     * Constructor.
+     *
+     * @param int $enrolinstanceid The id of the existing cohort enrolment instance.
+     * @param int $roleid The id of the role.
+     */
     public function __construct($enrolinstanceid, $roleid) {
         // Prepare some strings and things.
         $errorcode  = 'enrolcohortalreadysyncedwithrole';

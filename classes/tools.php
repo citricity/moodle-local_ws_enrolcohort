@@ -25,9 +25,11 @@
 
 namespace local_ws_enrolcohort;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
-
+/**
+ * Helper functions for local_ws_enrolcohort.
+ *
+ * @package     local_ws_enrolcohort
+ */
 class tools {
     /**
      * The plugins component name.
@@ -35,8 +37,10 @@ class tools {
     const COMPONENT_NAME = 'local_ws_enrolcohort';
 
     /**
+     * Get a string from this plugin's language file, resetting the string caches if the string is missing.
+     *
      * @param string $identifier
-     * @param null $a
+     * @param mixed $a
      * @return string
      * @throws \coding_exception
      * @throws \dml_exception
@@ -63,7 +67,7 @@ class tools {
     /**
      * Access this plugins settings.
      *
-     * @param null $settingname     Omitting this parameter returns all plugin settings.
+     * @param string|null $settingname Omitting this parameter returns all plugin settings.
      * @return mixed
      * @throws \dml_exception
      */

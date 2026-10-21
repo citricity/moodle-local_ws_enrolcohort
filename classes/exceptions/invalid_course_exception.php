@@ -25,12 +25,19 @@
 
 namespace local_ws_enrolcohort\exceptions;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
-
 use local_ws_enrolcohort\tools;
 
+/**
+ * Thrown when the course given is not valid for this operation.
+ *
+ * @package     local_ws_enrolcohort
+ */
 class invalid_course_exception extends \moodle_exception {
+    /**
+     * Constructor.
+     *
+     * @param string|null $debuginfo Extra detail about why the course is invalid.
+     */
     public function __construct($debuginfo = null) {
         parent::__construct('invalidcourse', tools::COMPONENT_NAME, '', null, $debuginfo);
     }

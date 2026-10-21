@@ -25,11 +25,12 @@
 
 namespace local_ws_enrolcohort\responses;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
-
+/**
+ * Base class for an object included in a webservice response.
+ *
+ * @package     local_ws_enrolcohort
+ */
 abstract class response implements base {
-
     /**
      * @var int $id             The id of the object this is representing.
      */

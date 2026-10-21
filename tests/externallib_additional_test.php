@@ -39,7 +39,6 @@ require_once($CFG->dirroot . '/local/ws_enrolcohort/externallib.php');
  * @covers      \local_ws_enrolcohort_external
  */
 final class externallib_additional_test extends \externallib_advanced_testcase {
-
     /**
      * Create a course, cohort and role and add a cohort enrolment instance through the webservice.
      *
@@ -156,7 +155,7 @@ final class externallib_additional_test extends \externallib_advanced_testcase {
         $this->resetAfterTest();
         $this->setAdminUser();
 
-        [$course, $cohort, $roleid, $added] = $this->create_instance(['name' => 'First']);
+        [$course, $cohort, , $added] = $this->create_instance(['name' => 'First']);
 
         // A second instance on the same course, same cohort, different role.
         $roleid2 = $this->getDataGenerator()->create_role();

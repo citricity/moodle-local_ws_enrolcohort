@@ -25,11 +25,13 @@
 
 namespace local_ws_enrolcohort\responses;
 
-// No direct access.
-defined('MOODLE_INTERNAL') || die();
+use local_ws_enrolcohort\tools;
 
-use \local_ws_enrolcohort\tools as tools;
-
+/**
+ * Response details for an error.
+ *
+ * @package     local_ws_enrolcohort
+ */
 class error extends response {
     /**
      * @var string $message     A localized message with details about the error.
@@ -42,14 +44,14 @@ class error extends response {
      * @param int $id
      * @param string $object                            The name of the object this error response is describing.
      * @param string $identifier                        The langstring identifier. Only gets strings from this plugins lang file.
-     * @param string|\stdClass $langstringplaceholder   Any placeholder values for the lang string.
+     * @param string|\stdClass $a                       Any placeholder values for the lang string.
      * @throws \coding_exception
      * @throws \dml_exception
      */
-    public function __construct($id = 0, $object = '', $identifier = '', $langstringplaceholder = null) {
+    public function __construct($id = 0, $object = '', $identifier = '', $a = null) {
         parent::__construct($id, $object);
 
         // Get a localized message.
-        $this->message = tools::get_string($identifier, $langstringplaceholder);
+        $this->message = tools::get_string($identifier, $a);
     }
 }
