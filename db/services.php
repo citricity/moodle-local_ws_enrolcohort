@@ -15,9 +15,9 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Definition of webservices for ws_enrolcohort.
+ * Definition of webservices for local_ws_enrolcohort.
  *
- * @package     ws_enrolcohort
+ * @package     local_ws_enrolcohort
  * @author      Donald Barrett <donald.barrett@learningworks.co.nz>
  * @copyright   2018 onwards, LearningWorks ltd
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later

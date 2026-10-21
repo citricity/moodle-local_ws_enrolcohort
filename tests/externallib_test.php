@@ -55,7 +55,7 @@ final class externallib_test extends externallib_advanced_testcase {
         }
     }
 
-    public function test_get_instances() {
+    public function test_get_instances(): void {
         global $SITE;
 
         // Test getting enrolment instances for the site course.
@@ -133,7 +133,7 @@ final class externallib_test extends externallib_advanced_testcase {
         }
     }
 
-    public function test_delete_instance() {
+    public function test_delete_instance(): void {
         $this->resetAfterTest(true);
 
         $wsenrolmentinstance = null;
@@ -200,7 +200,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals(tools::get_string('deleteinstance:200'), $deleteresponse['message']);
     }
 
-    public function test_update_instance_enrol_instance_id_not_found() {
+    public function test_update_instance_enrol_instance_id_not_found(): void {
         $this->resetAfterTest(true);
 
         $response = null;
@@ -218,7 +218,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertNull($response);
     }
 
-    public function test_update_instance_invalid_status() {
+    public function test_update_instance_invalid_status(): void {
         $this->resetAfterTest(true);
 
         $enrolmentinstance  = null;
@@ -267,7 +267,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertNull($response);
     }
 
-    public function test_update_instance_role_not_found() {
+    public function test_update_instance_role_not_found(): void {
         $this->resetAfterTest(true);
 
         $enrolmentinstance  = null;
@@ -315,7 +315,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertNull($response);
     }
 
-    public function test_update_instance_role_not_assignable() {
+    public function test_update_instance_role_not_assignable(): void {
         $this->resetAfterTest(true);
 
         $enrolmentinstance  = null;
@@ -365,7 +365,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertNull($response);
     }
 
-    public function test_update_instance_group_not_found() {
+    public function test_update_instance_group_not_found(): void {
         $this->resetAfterTest(true);
 
         $enrolmentinstance  = null;
@@ -413,7 +413,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertNull($response);
     }
 
-    public function test_update_instance_nochange() {
+    public function test_update_instance_nochange(): void {
         $this->resetAfterTest(true);
 
         $enrolmentinstance  = null;
@@ -470,7 +470,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals(1, count($response['data']));
     }
 
-    public function test_update_instance() {
+    public function test_update_instance(): void {
         global $DB;
 
         $this->resetAfterTest(true);
@@ -602,7 +602,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertEquals($DB->get_field('enrol', 'status', ['id' => $enrolmentinstanceid]), $newstatus);
     }
 
-    public function test_add_instance_success_without_group() {
+    public function test_add_instance_success_without_group(): void {
         $this->resetAfterTest(true);
 
         $response = null;
@@ -663,7 +663,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertNotEquals(-1, $response['id']);
     }
 
-    public function test_add_instance_success_with_group_new() {
+    public function test_add_instance_success_with_group_new(): void {
         $this->resetAfterTest(true);
 
         $response = null;
@@ -727,7 +727,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertNotEquals(-1, $response['id']);
     }
 
-    public function test_add_instance_success_with_group_existing() {
+    public function test_add_instance_success_with_group_existing(): void {
         $this->resetAfterTest(true);
 
         $response = null;
@@ -792,7 +792,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertNotEquals(-1, $response['id']);
     }
 
-    public function test_add_instance_success_with_group_existing_invalid_course() {
+    public function test_add_instance_success_with_group_existing_invalid_course(): void {
         $this->resetAfterTest(true);
 
         $response = null;
@@ -824,7 +824,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertNull($response);
     }
 
-    public function test_add_instance_enrol_instance_already_synced_with_role() {
+    public function test_add_instance_enrol_instance_already_synced_with_role(): void {
         $this->resetAfterTest(true);
 
         $response = null;
@@ -859,7 +859,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertNull($response);
     }
 
-    public function test_add_instance_invalid_status() {
+    public function test_add_instance_invalid_status(): void {
         $this->resetAfterTest(true);
 
         $response = null;
@@ -895,7 +895,7 @@ final class externallib_test extends externallib_advanced_testcase {
     /**
      * Test calling the add_instance webservice function missing the required parameters.
      */
-    public function test_add_instance_missing_required_params() {
+    public function test_add_instance_missing_required_params(): void {
         // The invalid params to test with.
         $courseid   = 0;
         $roleid     = 0;
@@ -958,7 +958,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertNull($response);
     }
 
-    public function test_add_instance_course_not_found() {
+    public function test_add_instance_course_not_found(): void {
         $courseid = $cohortid = $roleid = 0;
 
         $response = null;
@@ -975,7 +975,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertNull($response);
     }
 
-    public function test_add_instance_cohort_not_found() {
+    public function test_add_instance_cohort_not_found(): void {
         $this->resetAfterTest();
 
         $response = null;
@@ -998,7 +998,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertNull($response);
     }
 
-    public function test_add_instance_role_not_found() {
+    public function test_add_instance_role_not_found(): void {
         $this->resetAfterTest();
 
         $response = null;
@@ -1025,7 +1025,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertNull($response);
     }
 
-    public function test_add_instance_group_not_found() {
+    public function test_add_instance_group_not_found(): void {
         global $DB;
 
         $this->resetAfterTest();
@@ -1059,7 +1059,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertNull($response);
     }
 
-    public function test_add_instance_site_course() {
+    public function test_add_instance_site_course(): void {
         global $SITE;
 
         $this->resetAfterTest(true);
@@ -1084,7 +1084,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertNull($response);
     }
 
-    public function test_add_instance_cohort_unavailable() {
+    public function test_add_instance_cohort_unavailable(): void {
         $this->resetAfterTest(true);
 
         $response = null;
@@ -1116,7 +1116,7 @@ final class externallib_test extends externallib_advanced_testcase {
         $this->assertNull($response);
     }
 
-    public function test_add_instance_role_unassignable() {
+    public function test_add_instance_role_unassignable(): void {
         $this->resetAfterTest(true);
 
         $response = null;
