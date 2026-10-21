@@ -383,6 +383,35 @@ final class externallib_additional_test extends \externallib_advanced_testcase {
     }
 
     /**
+     * update_instance() refuses to change the role to one the same cohort is already synced with in the course.
+     */
+    public function test_update_instance_duplicate_role(): void {
+        global $DB;
+
+        $this->resetAfterTest();
+        $this->setAdminUser();
+
+        [$course, $cohort, $roleid, $first] = $this->create_instance();
+        $otherroleid = $this->getDataGenerator()->create_role();
+        $second = local_ws_enrolcohort_external::add_instance([
+            'courseid' => $course->id, 'cohortid' => $cohort->id, 'roleid' => $otherroleid,
+        ]);
+
+        // Keeping its own role is not a duplicate.
+        $response = local_ws_enrolcohort_external::update_instance(['id' => $second['id'], 'roleid' => $otherroleid]);
+        $this->assertEquals(200, $response['code']);
+
+        try {
+            local_ws_enrolcohort_external::update_instance(['id' => $second['id'], 'roleid' => $roleid]);
+            $this->fail('Expected an instance_role_synced_already_exception.');
+        } catch (exceptions\instance_role_synced_already_exception $e) {
+            $this->assertEquals('enrolcohortalreadysyncedwithrole', $e->errorcode);
+            $this->assertEquals($otherroleid, $DB->get_field('enrol', 'roleid', ['id' => $second['id']]));
+            $this->assertEquals($roleid, $DB->get_field('enrol', 'roleid', ['id' => $first['id']]));
+        }
+    }
+
+    /**
      * update_instance() with groupid -1 creates a new cohort group and links it to the instance.
      */
     public function test_update_instance_create_new_group(): void {

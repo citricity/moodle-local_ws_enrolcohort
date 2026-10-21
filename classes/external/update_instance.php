@@ -35,6 +35,7 @@ use local_ws_enrolcohort\exceptions\role_not_assignable_at_context_exception;
 use local_ws_enrolcohort\exceptions\invalid_status_exception;
 use local_ws_enrolcohort\exceptions\method_not_available_exception;
 use local_ws_enrolcohort\exceptions\instance_not_found_exception;
+use local_ws_enrolcohort\exceptions\instance_role_synced_already_exception;
 
 /**
  * Updates an existing cohort sync enrolment instance.
@@ -164,9 +165,21 @@ trait update_instance {
             } else if (empty($assignableroles) || !isset($assignableroles[$roleid])) {
                 // Role is not assignable at this context.
                 throw new role_not_assignable_at_context_exception($roleid);
-            } else {
-                $data->roleid = $roleid;
             }
+
+            // Don't allow a second instance syncing the same cohort with the same role in this course.
+            $sqlwhere = "roleid = :roleid AND customint1 = :cohortid AND courseid = :courseid AND enrol = 'cohort' AND id <> :id";
+            $sqlparams = [
+                'roleid'   => $roleid,
+                'cohortid' => $enrolmentinstance->{self::FIELD_COHORT},
+                'courseid' => $enrolmentinstance->courseid,
+                'id'       => $id,
+            ];
+            if ($existing = $DB->get_record_select('enrol', $sqlwhere, $sqlparams, 'id', IGNORE_MULTIPLE)) {
+                throw new instance_role_synced_already_exception($existing->id, $roleid);
+            }
+
+            $data->roleid = $roleid;
         }
 
         // Get the group id.
@@ -241,7 +254,7 @@ trait update_instance {
             $extradata[] = (new responses\cohort($enrolmentinstance->{self::FIELD_COHORT}))->to_array();
 
             // Get the new group and add to the response object.
-            if ($groupid == COHORT_CREATE_GROUP) {
+            if ($groupid == self::COHORT_GROUP_CREATE_NEW) {
                 $extradata[] = (new responses\group($data->{self::FIELD_GROUP}, 'group', $enrolmentinstance->courseid))->to_array();
             } else if ($groupid != $previousgroupid) {
                 $extradata[] = (new responses\group($groupid, 'group', $enrolmentinstance->courseid))->to_array();
