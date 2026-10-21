@@ -32,7 +32,7 @@ use local_ws_enrolcohort\tools;
  *
  * @package     local_ws_enrolcohort
  */
-class cohort_enrol_method_not_available_exception extends \moodle_exception {
+class method_not_available_exception extends \moodle_exception {
     /**
      * Constructor.
      */

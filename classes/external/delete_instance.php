@@ -29,8 +29,8 @@ use core_external\external_single_structure;
 use core_external\external_value;
 use local_ws_enrolcohort\tools;
 use local_ws_enrolcohort\responses;
-use local_ws_enrolcohort\exceptions\cohort_enrol_method_not_available_exception;
-use local_ws_enrolcohort\exceptions\cohort_enrol_instance_not_found_exception;
+use local_ws_enrolcohort\exceptions\method_not_available_exception;
+use local_ws_enrolcohort\exceptions\instance_not_found_exception;
 
 /**
  * Deletes a cohort sync enrolment instance.
@@ -85,12 +85,12 @@ trait delete_instance {
 
         // Validate the enrolment instance id.
         if (!$DB->record_exists('enrol', ['id' => $id, 'enrol' => 'cohort'])) {
-            throw new cohort_enrol_instance_not_found_exception($id);
+            throw new instance_not_found_exception($id);
         }
 
         // This is the important one. Check if the cohort enrolment instance is available for use.
         if (!$cohortenrolment = enrol_get_plugin('cohort')) {
-            throw new cohort_enrol_method_not_available_exception();
+            throw new method_not_available_exception();
         }
 
         // Set the HTTP response code.

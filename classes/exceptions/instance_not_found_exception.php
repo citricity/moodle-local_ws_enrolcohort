@@ -30,7 +30,7 @@ namespace local_ws_enrolcohort\exceptions;
  *
  * @package     local_ws_enrolcohort
  */
-class cohort_enrol_instance_not_found_exception extends object_not_found_exception {
+class instance_not_found_exception extends object_not_found_exception {
     /**
      * Constructor.
      *

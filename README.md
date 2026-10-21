@@ -29,9 +29,13 @@ Changes in this fork so far:
 * The web service functions have been split into one trait per operation under `classes/external`. The service
   definitions and function names are unchanged, so existing integrations keep working.
 * Fixed `add_instance()` ignoring a requested `status` of disabled.
-* The exception `cohort_enrol_instance_already_synced_with_role_exception` has been renamed to
-  `instance_role_synced_already_exception`. The `errorcode` (`enrolcohortalreadysyncedwithrole`) is unchanged, but
-  clients that check the `exception` class name in error responses need updating.
+* Exceptions are no longer prefixed with `cohort_enrol_`, as they are already namespaced under
+  `local_ws_enrolcohort\exceptions`:
+    * `cohort_enrol_instance_already_synced_with_role_exception` is now `instance_role_synced_already_exception`.
+    * `cohort_enrol_instance_not_found_exception` is now `instance_not_found_exception`.
+    * `cohort_enrol_method_not_available_exception` is now `method_not_available_exception`.
+
+  The error codes are unchanged, but clients that check the `exception` class name in error responses need updating.
 * Additional PHPUnit tests, code tidied to the current Moodle coding standard, and a GitHub Actions workflow that runs
   moodle-plugin-ci on every pull request.
 

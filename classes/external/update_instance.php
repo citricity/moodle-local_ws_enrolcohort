@@ -33,8 +33,8 @@ use local_ws_enrolcohort\exceptions\role_not_found_exception;
 use local_ws_enrolcohort\exceptions\group_not_found_exception;
 use local_ws_enrolcohort\exceptions\role_not_assignable_at_context_exception;
 use local_ws_enrolcohort\exceptions\invalid_status_exception;
-use local_ws_enrolcohort\exceptions\cohort_enrol_method_not_available_exception;
-use local_ws_enrolcohort\exceptions\cohort_enrol_instance_not_found_exception;
+use local_ws_enrolcohort\exceptions\method_not_available_exception;
+use local_ws_enrolcohort\exceptions\instance_not_found_exception;
 
 /**
  * Updates an existing cohort sync enrolment instance.
@@ -116,7 +116,7 @@ trait update_instance {
         $enrolmentinstance = null;
 
         if (!$DB->record_exists_select('enrol', $sqlwhere, $sqlparams)) {
-            throw new cohort_enrol_instance_not_found_exception($id);
+            throw new instance_not_found_exception($id);
         } else {
             $enrolmentinstance = $DB->get_record_select('enrol', $sqlwhere, $sqlparams);
             $context = \context_course::instance($enrolmentinstance->courseid);
@@ -211,7 +211,7 @@ trait update_instance {
 
         // This is the important one. Check if the cohort enrolment instance is available for use.
         if (!$cohortenrolment = enrol_get_plugin('cohort')) {
-            throw new cohort_enrol_method_not_available_exception();
+            throw new method_not_available_exception();
         }
 
         // Check whether only the id was passed.

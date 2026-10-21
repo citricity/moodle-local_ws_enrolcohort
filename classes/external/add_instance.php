@@ -37,7 +37,7 @@ use local_ws_enrolcohort\exceptions\course_is_site_exception;
 use local_ws_enrolcohort\exceptions\cohort_not_available_at_context_exception;
 use local_ws_enrolcohort\exceptions\role_not_assignable_at_context_exception;
 use local_ws_enrolcohort\exceptions\invalid_status_exception;
-use local_ws_enrolcohort\exceptions\cohort_enrol_method_not_available_exception;
+use local_ws_enrolcohort\exceptions\method_not_available_exception;
 use local_ws_enrolcohort\exceptions\instance_role_synced_already_exception;
 
 /**
@@ -256,7 +256,7 @@ trait add_instance {
 
         // This is the important one. Check if the cohort enrolment instance is available for use.
         if (!$cohortenrolment = enrol_get_plugin('cohort')) {
-            throw new cohort_enrol_method_not_available_exception();
+            throw new method_not_available_exception();
         }
 
         // Prepare the data to be returned as the response.

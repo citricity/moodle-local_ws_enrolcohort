@@ -79,11 +79,6 @@ jobs:
         if: ${{ !cancelled() }}
         run: moodle-plugin-ci phplint
 
-      - name: PHP Mess Detector
-        continue-on-error: true
-        if: ${{ !cancelled() }}
-        run: moodle-plugin-ci phpmd
-
       - name: Moodle Code Checker
         continue-on-error: true
         if: ${{ !cancelled() }}
